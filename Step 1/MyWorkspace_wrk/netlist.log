@@ -1,0 +1,125 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="MyLibrary_lib:cell_2:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+Port:Term1  N__1 0 Num=1 Z=Zref Ohm Noise=yes 
+Port:Term2  N__2 0 Num=2 Z=Zref Ohm Noise=yes 
+Port:Term3  N__12 0 Num=3 Z=Zref Ohm Noise=yes 
+Port:Term4  N__6 0 Num=4 Z=Zref Ohm Noise=yes 
+
+Zref=53 tune{ 25 to 75 by 1 }
+TLIN:TL1  N__1 N__20 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL2  N__20 N__12 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL3  N__12 N__6 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL4  N__1 N__2 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL5  N__2 N__18 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL6  N__18 N__6 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL7  N__20 N__18 Z=Z0V2 Ohm E=90 F=3.5 GHz 
+
+Z0H=36 tune{ 25 to 75 by 1 }
+
+Z0V1=Zref*(1+sqrt(1+K^2))/K
+
+Z0V2=(Z0H^2)*(Zref^2 + Z0V1^2)/(2*Z0V1*Zref^2)
+
+K=sqrt(10^0 / 10^-0.2)
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=3.2 GHz Stop=3.8 GHz Step=0.005 GHz 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2 \
+      SavedEquationName[1]="K" \
+      SavedEquationName[2]="Z0" \
+      SavedEquationName[3]="Z01" \
+      SavedEquationName[4]="Z01d" \
+      SavedEquationName[5]="Z01i" \
+      SavedEquationName[6]="Z024" \
+      SavedEquationName[7]="Z0H" \
+      SavedEquationName[8]="Z0V1" \
+      SavedEquationName[9]="Z0V2" \
+      SavedEquationName[10]="Z0pd" \
+      SavedEquationName[11]="Z0pi" \
+      SavedEquationName[12]="Z1" \
+      SavedEquationName[13]="Z24" \
+      SavedEquationName[14]="Zp" \
+      SavedEquationName[15]="Zref"
+
+#load "python","LinearCollapse"
+Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2
+TLIN:TL8  N__5 N__23 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL9  N__10 N__5 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL10  N__4 N__16 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL11  N__4 N__10 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL12  N__16 N__8 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL13  N__16 N__5 Z=Z0V2 Ohm E=90 F=3.5 GHz 
+TLIN:TL14  N__8 N__23 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL35  N__35 N__22 Z=Z01i Ohm E=90 F=3.5 GHz 
+Port:Term6  N__0 0 Num=6 Z=50 Ohm Noise=yes 
+Port:Term7  N__41 0 Num=7 Z=50 Ohm Noise=yes 
+Port:Term8  N__3 0 Num=8 Z=50 Ohm Noise=yes 
+TLIN:TL15  N__35 N__4 Z=Z024 E=90 F=3.5 GHz 
+TLIN:TL16  N__0 N__10 Z=sqrt(50*Zref) E=90 F=3.5 GHz 
+TLIN:TL17  N__8 N__41 Z=sqrt(Zref*50) E=90 F=3.5 GHz 
+TLIN:TL18  N__23 N__3 Z=sqrt(Zref*50) E=90 F=3.5 GHz 
+Port:Term15  N__13 0 Num=15 Z=50 Ohm Noise=yes 
+TLIN:TL23  N__28 N__25 Z=Z0H Ohm E=90 F=3.5 GHz 
+Port:Term13  N__36 0 Num=13 Z=Zref Ohm Noise=yes 
+Port:Term14  N__29 0 Num=14 Z=50 Ohm Noise=yes 
+Port:Term12  N__27 0 Num=12 Z=Zref Ohm Noise=yes 
+
+Z0pd=sqrt(Inter3*Zp)
+Port:Term10  N__39 0 Num=10 Z=Z1 Noise=yes 
+Port:Term9  N__19 0 Num=9 Z=50 Ohm Noise=yes 
+Port:Term19  N__34 0 Num=5 Z=50 Ohm Noise=yes 
+Port:Term16  N__11 0 Num=16 Z=50 Ohm Noise=yes 
+
+P=(10^-0.1)/((10^-0.2) +1)
+TLIN:TL21  N__36 N__38 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL22  N__36 N__28 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL20  N__31 N__27 Z=Z024 E=90 F=3.5 GHz 
+Port:Term11  N__31 0 Num=11 Z=Z24 Ohm Noise=yes 
+TLIN:TL27  N__38 N__25 Z=Z0V2 Ohm E=90 F=3.5 GHz 
+TLIN:TL26  N__38 N__26 Z=Z0H Ohm E=90 F=3.5 GHz 
+TLIN:TL25  N__26 N__14 Z=Z0V1 Ohm E=90 F=3.5 GHz 
+TLIN:TL24  N__25 N__14 Z=Z0H Ohm E=90 F=3.5 GHz 
+
+Z1=Z24/P
+
+Z01=sqrt(Z1*50)
+
+Z0pi=sqrt(50*Inter3)
+TLIN:TL39  N__30 N__17 Z=Z0pi Ohm E=90 F=3.5 GHz 
+Port:Term20  N__30 0 Num=19 Z=50 Ohm Noise=yes 
+
+inter1=56.5 tune{ 48.25 to 144.75 by 1 }
+
+Z024=sqrt(Z24*Zref)
+
+Z24=37 tune{ 0 to 150 by 1 }
+TLIN:TL31  N__33 N__37 Z=Z0pi Ohm E=90 F=3.5 GHz 
+Port:Term18  N__15 0 Num=18 Z=Zp Ohm Noise=yes 
+Port:Term17  N__33 0 Num=17 Z=50 Ohm Noise=yes 
+TLIN:TL28  N__29 N__28 Z=sqrt(50*Zref) E=90 F=3.5 GHz 
+TLIN:TL37  N__39 N__32 Z=Z01i Ohm E=90 F=3.5 GHz 
+
+Zp=((1/Z24)+(1/Z1))^-1
+TLIN:TL30  N__14 N__11 Z=sqrt(Zref*50) E=90 F=3.5 GHz 
+TLIN:TL34  N__32 N__7 Z=Z01d Ohm E=90 F=3.5 GHz 
+TLIN:TL36  N__22 N__24 Z=Z01d Ohm E=90 F=3.5 GHz 
+
+Inter3=30.115 tune{ 21.175 to 63.525 by 1 }
+TLIN:TL38  N__37 N__15 Z=Z0pd Ohm E=90 F=3.5 GHz 
+TLIN:TL29  N__26 N__13 Z=sqrt(Zref*50) E=90 F=3.5 GHz 
+
+Z01i=sqrt(Z1*inter1)
+
+Z01d=sqrt(inter1*50)
+TLIN:TL40  N__17 N__35 Z=Z0pd Ohm E=90 F=3.5 GHz 
+TLIN:TL41  N__24 N__34 Z=50 Ohm E=300 F=3.5 GHz 
+TLIN:TL42  N__7 N__19 Z=50 Ohm E=300 F=3.5 GHz 
+
+Z0=sqrt(50*Zref)

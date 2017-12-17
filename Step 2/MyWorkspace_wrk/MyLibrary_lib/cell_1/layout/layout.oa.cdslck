@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      Diego
+HostName                       Diego-PC
+ProcessIdentifier              9448
+ProcessCreationTime_UTC        1511631446
+ProcessCreationTime_Readable   11/25/17 18:37:26 Hora est·ndar romance
+AppIdentifier                  OA File System Design Manager
+OSType                         win32
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         C:\Users\Diego\Desktop\PROJECT AUTOLEARNING\Projects\Dise√±o de un distribuidor de potencia con ADS\Step 2\MyWorkspace_wrk\MyLibrary_lib\cell_1\layout\layout.oa.cdslck
+TimeEditLocked                 11/25/17 18:38:07 Hora est·ndar romance

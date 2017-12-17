@@ -1,0 +1,12 @@
+Fri Nov 10 18:36:19 2017
+Writing Gerber file "C:\Users\eps\Downloads\Ficheros\MyWorkspace_wrk\mfg\MyLibrary_lib_cell_1\gerber".
+
+Warnings occurred during translation:
+
+
+WARNING: For artwork accuracy, Gerber precision should have a finer resolution than ADS layout precision.
+To ensure this, set the "Fractional digits" Gerber export option to be one greater than the number
+ of decimal places in the "Layout Units > Resolution" layout preference value.
+
+Export Complete
+
